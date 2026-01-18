@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+python-multipart
+python-dotenv
+pydantic
+langchain-groq
+langchain-core
+langgraph
+sentence-transformers
+pinecone-client
+pypdf
+python-docx
+
+

@@ -1,0 +1,152 @@
+.score-wrapper {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+    /* Soft, spread out shadow */
+    border: 1px solid #f3f4f6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
+.score-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, #ef4444, #eab308, #22c55e);
+}
+
+.gauge-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.gauge-container {
+    width: 100%;
+    max-width: 280px;
+    position: relative;
+    text-align: center;
+}
+
+.gauge-svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+.gauge-progress {
+    transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.score-content {
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.score-text {
+    font-size: 56px;
+    font-weight: 800;
+    color: #111827;
+    margin: 0;
+    line-height: 1;
+    letter-spacing: -2px;
+}
+
+.percent {
+    font-size: 28px;
+    color: #6b7280;
+    font-weight: 600;
+    margin-left: 2px;
+}
+
+.status-badge {
+    margin-top: 8px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    background: #f9fafb;
+    border: 1px solid transparent;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Breakdown Section */
+.breakdown-section {
+    width: 100%;
+    max-width: 400px;
+}
+
+.breakdown-title {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #6b7280;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.breakdown-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.breakdown-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.breakdown-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 500;
+    color: #374151;
+}
+
+.icon-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #4b5563;
+}
+
+.score-value {
+    font-weight: 700;
+    color: #111827;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 8px;
+    background: #f3f4f6;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6366f1, #312e81);
+    /* Indigo gradient */
+    border-radius: 4px;
+    transition: width 1s ease-out;
+}
