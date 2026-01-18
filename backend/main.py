@@ -28,9 +28,9 @@ app.add_middleware(
 )
 
 
-@app.get("/")
-def root():
-    """Root endpoint"""
+@app.get("/api")
+def api_root():
+    """API Root endpoint"""
     return {
         "message": "Resume RAG Analyzer API",
         "version": "1.0.0",
