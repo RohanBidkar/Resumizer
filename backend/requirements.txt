@@ -7,7 +7,7 @@ langchain-groq
 langchain-core
 langgraph
 sentence-transformers
-pinecone-client
+pinecone
 pypdf
 python-docx
 
