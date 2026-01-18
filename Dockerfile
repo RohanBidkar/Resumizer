@@ -24,6 +24,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy backend code
 COPY backend/ .
 
+# Preload models
+RUN python preload_model.py
+
 # Copy frontend build artifacts from previous stage
 # This assumes backend/main.py expects frontend files at ../frontend/dist
 # So we create that structure in the container

@@ -13,10 +13,30 @@ import os
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import JSONResponse, FileResponse
 
+from contextlib import asynccontextmanager
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup: Check critical env vars
+    print("🚀 Starting Resume RAG Analyzer...")
+    if not Config.GROQ_API_KEY:
+        print("⚠️ WARNING: GROQ_API_KEY is missing! Analysis will fail.")
+    else:
+        print("✅ GROQ_API_KEY found.")
+        
+    if not Config.PINECONE_API_KEY:
+        print("⚠️ WARNING: PINECONE_API_KEY is missing! RAG will fail.")
+    else:
+        print("✅ PINECONE_API_KEY found.")
+        
+    yield
+    # Shutdown logic (if any)
+
 app = FastAPI(
     title="Resume RAG Analyzer",
     description="AI-powered ATS score calculator using RAG (LangGraph + ChatGroq + Pinecone)",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan
 )
 
 app.add_middleware(
