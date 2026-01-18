@@ -12,3 +12,5 @@ services:
         sync: false
       - key: PINECONE_INDEX_NAME
         value: resume-rag
+      - key: SKIP_INDEX_CHECK
+        value: true

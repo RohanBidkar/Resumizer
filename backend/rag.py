@@ -3,14 +3,15 @@ from sentence_transformers import SentenceTransformer
 from pinecone import Pinecone, ServerlessSpec
 from config import Config
 import time
+import os
 
 
 class SimpleEmbeddings:
     
     def __init__(self):
-        print("Loading embedding model")
+        print("⚡ Loading embedding model (cached from Docker build)...")
         self.model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
-        print("Model loaded and cached!")
+        print("✅ Model ready!")
     
     def embed(self, text):
         """Create embedding for text"""
@@ -30,9 +31,17 @@ class SimpleRAG:
         self.index_name = Config.PINECONE_INDEX_NAME
         self.embeddings = SimpleEmbeddings()
         
-        self._create_index_if_needed()
+        # Skip index creation check in production to speed up cold starts
+        # Set SKIP_INDEX_CHECK=true in Render environment variables
+        skip_check = os.getenv("SKIP_INDEX_CHECK", "false").lower() == "true"
+        
+        if not skip_check:
+            self._create_index_if_needed()
+        else:
+            print(f"⚡ Skipping index check (production mode)")
+            
         self.index = self.pc.Index(self.index_name)
-        print(f"Connected to Pinecone: {self.index_name}")
+        print(f"✅ Connected to Pinecone: {self.index_name}")
     
     def _create_index_if_needed(self):
         existing = [idx.name for idx in self.pc.list_indexes()]

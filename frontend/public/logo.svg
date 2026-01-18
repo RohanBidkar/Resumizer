@@ -1,0 +1,13 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Black Hexagon Background -->
+  <path d="M256 32L448 144V368L256 480L64 368V144L256 32Z" fill="#1a1a1a"/>
+  
+  <!-- White "R" Letter -->
+  <text x="50%" y="50%" 
+        dominant-baseline="middle" 
+        text-anchor="middle" 
+        font-family="Arial, sans-serif" 
+        font-size="280" 
+        font-weight="800" 
+        fill="white">R</text>
+</svg>

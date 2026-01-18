@@ -74,11 +74,12 @@ def llm_analysis_node(state: ResumeAnalysisState) -> ResumeAnalysisState:
 Analyze the resume against the job description and provide a comprehensive JSON response.
 
 Calculate ATS score (0-100) based on:
-- Skills Match (40%): How many required skills are present
-- Experience Relevance (30%): How relevant is their experience
-- Education Match (15%): Does education meet requirements
-- Resume Quality (15%): Formatting, clarity, achievements
+- Skills Match (MAX 40 points): How many required skills are present
+- Experience Relevance (MAX 30 points): How relevant is their experience
+- Education Match (MAX 15 points): Does education meet requirements
+- Resume Quality (MAX 15 points): Formatting, clarity, achievements
 
+IMPORTANT: Ensure scores do NOT exceed their maximum values!
 Be strict but fair in scoring."""
 
             user_prompt = f"""**RESUME:**
@@ -94,10 +95,10 @@ Analyze and return JSON:
 {{
     "ats_score": 75.5,
     "score_breakdown": {{
-        "skills_score": 30.0,
-        "experience_score": 22.5,
-        "education_score": 12.0,
-        "quality_score": 11.0
+        "skills_score": 30.0,     // MAX 40
+        "experience_score": 22.5,  // MAX 30
+        "education_score": 12.0,   // MAX 15
+        "quality_score": 11.0      // MAX 15
     }},
     "extracted_info": {{
         "name": "John Doe",
@@ -226,6 +227,13 @@ async def analyze_resume(resume_text: str, jd_text: Optional[str], filename: str
     if jd_text:
         # Calculate total_score from components
         breakdown_data = result.get("score_breakdown", {})
+        
+        # Clamp scores to their maximum values to prevent validation errors
+        breakdown_data["skills_score"] = min(breakdown_data.get("skills_score", 0), 40)
+        breakdown_data["experience_score"] = min(breakdown_data.get("experience_score", 0), 30)
+        breakdown_data["education_score"] = min(breakdown_data.get("education_score", 0), 15)
+        breakdown_data["quality_score"] = min(breakdown_data.get("quality_score", 0), 15)
+        
         total = (
             breakdown_data.get("skills_score", 0) +
             breakdown_data.get("experience_score", 0) +
