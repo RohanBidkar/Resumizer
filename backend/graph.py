@@ -95,10 +95,10 @@ Analyze and return JSON:
 {{
     "ats_score": 75.5,
     "score_breakdown": {{
-        "skills_score": 30.0,     // MAX 40
-        "experience_score": 22.5,  // MAX 30
-        "education_score": 12.0,   // MAX 15
-        "quality_score": 11.0      // MAX 15
+        "skills_score": 30.0,
+        "experience_score": 22.5,
+        "education_score": 12.0,
+        "quality_score": 11.0
     }},
     "extracted_info": {{
         "name": "John Doe",
